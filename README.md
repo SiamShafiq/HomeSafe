@@ -6,11 +6,11 @@ This is a website to plan safe routes for individuals to take to and from destin
 ## Features 
 
 - Safety based routing  
-     - After each route, users can input their personal safety level  
+     - After each route, users can input their personal safety level. This data is analyzed to plan future routes.  
 - Route specific news  
      - Users can receive information on their destination through relevant news articles that they can click to view 
 - Night friendly   
-     - Night mode colour scheme available to users so they can customize the site to be of enhanced use during the evening.
+     - Night mode colour scheme available to users so they can customize the site to be of enhanced use during the evening.  
 
 
 ![light_mode](https://user-images.githubusercontent.com/82855300/153733939-f7690941-ceec-4377-baf1-c51a1e3e7ef6.PNG)
