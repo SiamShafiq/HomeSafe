@@ -67,7 +67,7 @@ var end;
 
 async function getRoute(start, end) {
     const query = await fetch(
-        "http://api.mapbox.com/directions/v5/mapbox/walking/" + start.lng + "," + start.lat + ";" + end.lng + "," + end.lat + "?steps=true&geometries=geojson&access_token=" + accessToken,
+        "https://api.mapbox.com/directions/v5/mapbox/walking/" + start.lng + "," + start.lat + ";" + end.lng + "," + end.lat + "?steps=true&geometries=geojson&access_token=" + accessToken,
       { method: 'GET' }
     );
 
@@ -131,27 +131,90 @@ var removeRoute = function(){
     });
 }
 
+var locationIcon = L.icon({
+    iconUrl: 'circle.png',
+    iconSize: [30, 30],
+    iconAnchor: [15, 15],
+    popupAnchor: [-3, -76],
+    shadowSize: [68, 95],
+    shadowAnchor: [22, 94]
+});
+
 function onMapClick(e) {
-    popup
-        .setLatLng(e.latlng)
-        .setContent("You clicked the map at " + e.latlng.toString())
-        .openOn(map);
 
-	if(typeof start === 'undefined'){
+    if(typeof start === 'undefined'){
+        start_marker = new L.marker(e.latlng, {draggable:'true', icon: locationIcon});
+        start_marker.on('dragend', function(event){
+            var start_marker = event.target;
+            var position = start_marker.getLatLng();
+    
+            start_marker.setLatLng(new L.LatLng(position.lat, position.lng),{draggable:'true'});
+            map.panTo(new L.LatLng(position.lat, position.lng))
+
+            start = position;
+            removeRoute();
+		    getRoute(start, end);
+
+        });
+        
+        map.addLayer(start_marker)
 		start = e.latlng;
+        
 	}else if(typeof end === 'undefined'){
+        end_marker = new L.marker(e.latlng, {draggable:'true', icon: locationIcon});
+        end_marker.on('dragend', function(event){
+            var end_marker = event.target;
+            var position = end_marker.getLatLng();
+    
+            end_marker.setLatLng(new L.LatLng(position.lat, position.lng),{draggable:'true'});
+            map.panTo(new L.LatLng(position.lat, position.lng))
+
+            end = position;
+
+            removeRoute();
+		    getRoute(start, end);
+
+        });
+
+        map.addLayer(end_marker)
 		end = e.latlng;
-	}else{
-		end = e.latlng;
+        getRoute(start, end);
+
 	}
 
-	if(typeof start != 'undefined' & typeof end != 'undefined'){
-		removeRoute();
-		getRoute(start, end);
-	}
+	// if(typeof start != 'undefined' & typeof end != 'undefined'){
+	// 	removeRoute();
+	// 	getRoute(start, end);
+	// }
+
+    // popup
+    //     .setLatLng(e.latlng)
+    //     .setContent("You clicked the map at " + e.latlng.toString())
+    //     .openOn(map);
+
+	
 }
 
 map.on('click', onMapClick);
+
+
+var locationData = "4900 Lennox Lane";
+var localURL = "https://api.mapbox.com/geocoding/v5/mapbox.places/" + locationData + ".json?access_token=pk.eyJ1Ijoic2lhbXNoYWZpcTciLCJhIjoiY2plbGo4ano2NDg0YzJxcWVkZmtyZmg1MyJ9.fgQjadXw1yk-M8ZhY2pFAg"
+
+async function getLocalURL(){
+    const query = await fetch(
+        localURL,
+      { method: 'GET' }
+    );
+
+    const json = await query.json();
+    console.log(json);
+}
+
+// getLocalURL();
+
+
+
 
 // L.leafletControlRoutingtoaddress({
 //     position: 'topright',
@@ -166,5 +229,24 @@ map.on('click', onMapClick);
 
 // }).addTo(map);
 
+var arcgis_api = "AAPK15be382c10fe4b57b730a869983f97f1GQizZYFc_K211ierd-XT8GpBJnQqxI3X2jlVHCfOzW9kSsZfbnK2hGpNit-ssi15";
 
-// News API
+// var searchControl = L.esri.Geocoding.geosearch({
+//     position: 'topleft',
+//     placeholder: 'Enter an address or place e.g. 1 York St',
+//     useMapBounds: false,
+//     providers: [L.esri.Geocoding.arcgisOnlineProvider({
+//       apikey: arcgis_api, // replace with your api key - https://developers.arcgis.com
+//       nearby: {
+//         lat: -33.8688,
+//         lng: 151.2093
+//       }
+//     })]
+//   }).addTo(map);
+
+
+//   var searchControl = L.Control.geocoder().addTo(map);
+//   $(searchControl.getContainer()).removeClass("geocoder-control leaflet-control");
+
+//   var searchParent = $("#orig-control").get(0).append(searchControl.getContainer());
+

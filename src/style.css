@@ -103,13 +103,6 @@ html, body {margin: 0; height: 100%; overflow: hidden}
     border-radius: 50%;
   }
 
-/* direction box */
-/* .box {
-  /* position:absolute;
-  left: 10px;
-  top:10px; */
-  } */
-
 #news_button {
     position: absolute;
     right: 10px;
@@ -142,4 +135,8 @@ html, body {margin: 0; height: 100%; overflow: hidden}
 #news{
   overflow-y: auto;
   height: 40%;
+}
+
+.geocoder-control{
+  width: 275px;
 }
