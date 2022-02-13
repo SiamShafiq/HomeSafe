@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
+   integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A=="
+   crossorigin=""/>
+
+   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/skeleton/2.0.4/skeleton.css">
+  
+
+   <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"
+   integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="
+   crossorigin="">
+  </script>
+
+   <link rel = "stylesheet" href = "style.css">
+
+    
+    <title> </title>
+</head>
+
+<label class="switch">
+    <input type="checkbox" id="myCheckbox" onchange="toggleCheck()">
+  <span class="slider round"></span>
+</label>
+
+<body>
+      <div class="left-bar">
+        <div class="box" id="box-id">
+
+            <div class="field">
+              <label class="label">Choose starting point</label>
+              <div class="control">
+                <input class="input" type="text" placeholder="e.g. Home" id = "orig">
+              </div>
+            </div>
+          
+            <div class="field">
+                <label class="label">Choose destination</label>
+                <div class="control">
+                    <input class="input" type="text" placeholder="eg. Work" id="dest">
+                </div>
+            </div>
+                
+            <button class="destination-search" onclick="retrieve()">Go</button>
+          </div>
+
+        <div class = "panel" id = "news">
+            <p class="panel-heading">News Articles</p>
+        </div>
+    </div>
+    <div id="map"></div>
+
+    <div class="box" id="news">
+    
+    </div>
+
+    <div class="container">
+      <ul class="news-list">
+      </ul>
+    </div>
+
+    <script>
+
+      $(document).on('keypress', function(e) {
+          if(e.which == 13){
+              retrieve();
+          }
+      });
+
+      async function retrieve(e){
+        const orig = $("#orig").val();
+        const dest = $("#dest").val();
+
+        const apiKey = '19a9c206b92a47d7b554ff4782049c01';
+        let url =`https://newsapi.org/v2/everything?q=${dest}&apiKey=${apiKey}`;
+
+        const query = await fetch(
+          url, {method : 'GET'}
+        );
+
+        const jsonData = await query.json();
+        console.log(jsonData);
+        jsonData.articles.forEach(article => {
+            $("#news").append("<a class='panel-block' href=" + article.url + ">" + article.title + "</a>");
+        //   let li = document.createElement('li');
+        //   let a = document.createElement('a');
+        //   a.setAttribute('href', article.url);
+        //   a.setAttribute('target','_blank');
+        //   a.textContent = article.title;
+        //   li.appendChild(a);
+        //   newsList.appendChild(li);
+
+        })
+
+        var newsScroll = $("#news").get();
+        var topPos = newsScroll.offsetTop;
+    }
+    </script>
+
+
+   
+</body>
+
+<script src="script.js"></script>
+</html>
