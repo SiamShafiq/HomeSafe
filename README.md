@@ -8,7 +8,7 @@ This is a website to plan safe routes for individuals to take to and from destin
 - Safety based routing  
      - After each route, users can input their personal safety level  
 - Route specific news  
-     - Users can receive information on their destination.
+     - Users can receive information on their destination through relevant news articles that they can click to view 
 - Night friendly   
      - Night mode colour scheme available to users  
 
