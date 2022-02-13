@@ -13,12 +13,12 @@ html, body {margin: 0; height: 100%; overflow: hidden}
   position: absolute;
   float: left;
   padding: 2em;
-  width: 20vw;
-  height: 60vh;
+  width: 40vw;
+  min-width: 350px;
+  max-width: 600px;
+  height: 50vh;
   z-index: 2;
 }
-
-
 
 
 #map { 
@@ -105,9 +105,9 @@ html, body {margin: 0; height: 100%; overflow: hidden}
 
 /* direction box */
 /* .box {
-  position:absolute;
+  /* position:absolute;
   left: 10px;
-  top:10px;
+  top:10px; */
   } */
 
 #news_button {
@@ -121,15 +121,13 @@ html, body {margin: 0; height: 100%; overflow: hidden}
 }
 
 .container {
+  z-index: 1;
   position:absolute;
-  z-index:1;
-  background-color: white;
-  width:500px;
-  overflow-y: auto;
-  height:500px;
 }
 
 .destination-search {
+  /* position: relative; */
+  /* top:20px; */
   margin-top: 2em;
 }
 
@@ -143,7 +141,5 @@ html, body {margin: 0; height: 100%; overflow: hidden}
 
 #news{
   overflow-y: auto;
-  height: 450px;
+  height: 40%;
 }
-
-

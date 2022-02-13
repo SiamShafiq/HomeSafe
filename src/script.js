@@ -5,7 +5,7 @@ var mapOptions ={
 var accessToken = "pk.eyJ1Ijoic2lhbXNoYWZpcTciLCJhIjoiY2plbGo4ano2NDg0YzJxcWVkZmtyZmg1MyJ9.fgQjadXw1yk-M8ZhY2pFAg";
 console.log("This script is running");
 
-var map = L.map('map', mapOptions).setView([45.508888, -73.561668], 7);
+var map = L.map('map', mapOptions).setView([45.508888, -73.561668], 12);
 
 
 var Stamen_TonerLite = L.tileLayer('https://stamen-tiles-{s}.a.ssl.fastly.net/toner-lite/{z}/{x}/{y}{r}.{ext}', {
@@ -24,10 +24,7 @@ function toggleCheck() {
 		$(".label").addClass("greentxt");
 		$(".button").addClass("blackBG");
 		$(".button").addClass("greentxt");
-        $(".panel-heading").addClass("greentxt");
-        $(".panel-heading").addClass("blackBG");
-        $(".panel").addClass("greentxt");
-        $(".panel").addClass("blackBG");
+        $(".search").addClass("greentxt");
 	var Jawg_Matrix = L.tileLayer('https://{s}.tile.jawg.io/jawg-matrix/{z}/{x}/{y}{r}.png?access-token=YGO7Or8lNnEeYrokBZQ4x1HGDtUe6tJ3rnquOMHbxOfBjyowxJWxEg6cWp7HTY7R', {
 		attribution: '<a href="http://jawg.io" title="Tiles Courtesy of Jawg Maps" target="_blank">&copy; <b>Jawg</b>Maps</a> &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
 		minZoom: 0,
@@ -41,10 +38,7 @@ function toggleCheck() {
 		$(".label").removeClass("greentxt");
 		$(".button").removeClass("blackBG");
 		$(".button").removeClass("greentxt");
-        $(".panel-heading").removeClass("greentxt");
-        $(".panel-heading").removeClass("blackBG");
-        $(".panel").removeClass("greentxt");
-        $(".panel").removeClass("blackBG");
+        $(".search").removeClass("greentxt");
 		var Stamen_TonerLite = L.tileLayer('https://stamen-tiles-{s}.a.ssl.fastly.net/toner-lite/{z}/{x}/{y}{r}.{ext}', {
 			attribution: 'Map tiles by <a href="http://stamen.com">Stamen Design</a>, <a href="http://creativecommons.org/licenses/by/3.0">CC BY 3.0</a> &mdash; Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
 			subdomains: 'abcd',
@@ -67,22 +61,13 @@ function newsFunction() {
     }
 }
 
-
-// var Jawg_Matrix = L.tileLayer('https://{s}.tile.jawg.io/jawg-matrix/{z}/{x}/{y}{r}.png?access-token=YGO7Or8lNnEeYrokBZQ4x1HGDtUe6tJ3rnquOMHbxOfBjyowxJWxEg6cWp7HTY7R', {
-// 	attribution: '<a href="http://jawg.io" title="Tiles Courtesy of Jawg Maps" target="_blank">&copy; <b>Jawg</b>Maps</a> &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
-// 	minZoom: 0,
-// 	maxZoom: 22,
-// 	subdomains: 'abcd',
-// 	accessToken: '<your accessToken>'
-// }).addTo(map);
-
 var popup = L.popup();
 var start;
 var end;
 
 async function getRoute(start, end) {
     const query = await fetch(
-        "https://api.mapbox.com/directions/v5/mapbox/walking/" + start.lng + "," + start.lat + ";" + end.lng + "," + end.lat + "?steps=true&geometries=geojson&access_token=" + accessToken,
+        "http://api.mapbox.com/directions/v5/mapbox/walking/" + start.lng + "," + start.lat + ";" + end.lng + "," + end.lat + "?steps=true&geometries=geojson&access_token=" + accessToken,
       { method: 'GET' }
     );
 
@@ -166,24 +151,20 @@ function onMapClick(e) {
 	}
 }
 
-// var mymap = L.map('mapid').setView([50.27264, 7.26469], 13);
-
-//     L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png')
-//             .addTo(map);
-
-    // L.leafletControlRoutingtoaddress({
-    //     position: 'topright',
-    //     router: 'osrm',
-    //     token: '',
-    //     placeholder: 'Please insert your address here.',
-    //     errormessage: 'Address not valid.',
-    //     distance: 'Entfernung:',
-    //     duration: 'Fahrzeit',
-    //     target: 'Koblenz, Rheinland-Pfalz, Deutschland',
-    //     requesterror: '"Too Many Requests" or "Not Authorized - Invalid Token"'
-
-    // }).addTo(map);
-
 map.on('click', onMapClick);
+
+// L.leafletControlRoutingtoaddress({
+//     position: 'topright',
+//     router: 'mapbox',
+//     token: accessToken,
+//     placeholder: 'Please insert your address here.',
+//     errormessage: 'Address not valid.',
+//     distance: 'Entfernung:',
+//     duration: 'Fahrzeit',
+//     target: 'Koblenz, Rheinland-Pfalz, Deutschland',
+//     requesterror: '"Too Many Requests" or "Not Authorized - Invalid Token"'
+
+// }).addTo(map);
+
 
 // News API
