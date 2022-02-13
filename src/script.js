@@ -132,7 +132,7 @@ var removeRoute = function(){
 }
 
 var locationIcon = L.icon({
-    iconUrl: 'circle.png',
+    iconUrl: 'images/circle.png',
     iconSize: [30, 30],
     iconAnchor: [15, 15],
     popupAnchor: [-3, -76],
