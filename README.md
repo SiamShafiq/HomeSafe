@@ -8,7 +8,7 @@ This is a website to plan safe routes for individuals to take to and from destin
 - Safety based routing  
      - After each route, users can input their personal safety level  
 - Route specific news  
-     - Presentations are communication tools that can be used as demonstrations, lectures, speeches, reports, and more.  
+     - Users can receive information on their destination.
 - Night friendly   
      - Night mode colour scheme available to users  
 
