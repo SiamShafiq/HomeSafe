@@ -11,3 +11,5 @@ This is a website to plan safe routes for individuals to take to and from destin
      - Presentations are communication tools that can be used as demonstrations, lectures, speeches, reports, and more.  
 - Night friendly   
      - Night mode colour scheme available to users  
+
+!(C:\Users\Yilian Zhao\Downloads\SafeWay\SafeWay\src\images\dark_mode.PNG)
