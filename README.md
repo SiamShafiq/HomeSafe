@@ -12,4 +12,4 @@ This is a website to plan safe routes for individuals to take to and from destin
 - Night friendly   
      - Night mode colour scheme available to users  
 
-!(https://github.com/sillyyilly/SafeWay/blob/feae117db8c35b2a6510e33e5f7b3b2d37a6ab03/src\images\dark_mode.PNG)
+!(src\images\dark_mode.PNG)
